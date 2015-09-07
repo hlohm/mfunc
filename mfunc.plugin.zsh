@@ -25,6 +25,17 @@ autoload $(ls $ZSH/functions/)
 #functions
 ##########
 
+# helper
+function mfunc_define() {
+
+            touch $ZSH/functions/$i
+            chmod +x $ZSH/functions/$i
+            echo "enter function '$i' and finish with CTRL-D"
+            cat >$ZSH/functions/$i
+            echo "new function '$i' created in $ZSH/functions"
+            source $ZSH/custom/plugins/mfunc/mfunc.plugin.zsh
+            echo "function is now available"
+}
 # make function(s)
 function mfunc() {
 
@@ -35,13 +46,7 @@ function mfunc() {
     else
         # to do: prompt user to overwrite existing function
         for i do;
-            touch $ZSH/functions/$i
-            chmod +x $ZSH/functions/$i
-            echo "enter function '$i' and finish with CTRL-D"
-            cat >$ZSH/functions/$i
-            echo "new function '$i' created in $ZSH/functions"
-            source $ZSH/custom/plugins/mfunc/mfunc.plugin.zsh
-            echo "function is now available"
+            mfunc_define $i
         done
     fi
 }
