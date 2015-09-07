@@ -17,8 +17,8 @@ if [ ! -d $ZSH/functions/ ]; then
     echo "mfunc init: functions directory created in $ZSH"
 fi
 
-# autoload all functions in functions directory
-autoload $(ls $ZSH/functions/)
+# autoload any functions in functions directory
+[[ -e $ZSH/functions/* ]] && autoload $(ls $ZSH/functions/)
 
 
 #
