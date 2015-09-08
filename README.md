@@ -15,7 +15,6 @@ first time).
 
 Run:
 
-`mkdir -p $ZSH/custom/plugins/mfunc && curl -LSso $ZSH/custom/plugins/mfunc \
-https://raw.github.com/hlohm/mfunc/master/mfunc.plugin.zsh`
+`mkdir -p $ZSH/custom/plugins/mfunc && curl -LSso $ZSH/custom/plugins/mfunc https://raw.github.com/hlohm/mfunc/master/mfunc.plugin.zsh`
 
 ...and add the plugin `mfunc` to your plugins in your `.zshrc`
