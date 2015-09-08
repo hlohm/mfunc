@@ -1,8 +1,9 @@
 ## mfunc
 #### a function wrapper plugin for oh-my-zsh
 
-This is handy for defining functions on-the-fly that will last longer than your
-current login session without editing any config files.
+Allows you to define persistent functions on-the-fly, without the need to add
+them to your config files. Your functions are permanently available until you
+delete them.
 
 The plugin defines 3 functions:
 
@@ -22,10 +23,13 @@ first time).
 
 `cd $ZSH/custom && git clone https://github.com/hlohm/mfunc.git plugins/mfunc`
 
-2. Add `mfunc` to your plugins in your `.zshrc`. The relevant line schould
+2. Add `mfunc` to your plugins in your `.zshrc`. The relevant line should
 look something like this:
 
 `plugins=(git mfunc)`
+
+Upon its first run the plugin will notify you that it created the directory in
+which it stores your functions.
 
 #### Disclaimer
 
