@@ -20,7 +20,7 @@ first time).
 
 1. Run:
 
-`cd $ZSH/custom && git clone https://github.com/hlohm/mfunc.git plugins/mfunct4`
+`cd $ZSH/custom && git clone https://github.com/hlohm/mfunc.git plugins/mfunc`
 
 2. Add `mfunc` to your plugins in your `.zshrc`. The relevant line schould
 look something like this:
