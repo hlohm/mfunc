@@ -3,8 +3,8 @@
 
 This little tool defines 3 helper functions:
 
-* mfunc <name> [name] ...   -> create new function(s) interactively
-* rfunc <name> [name] ...   -> delete existing function(s)
+* mfunc name [name] ...     -> create new function(s) interactively
+* rfunc name [name] ...     -> delete existing function(s)
 * lfunc                     -> lists user-defined functions
 
 functions are stored as plain text in $ZSH/functions/ and made available via
