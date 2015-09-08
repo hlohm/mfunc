@@ -2,8 +2,9 @@
 ### a function wrapper plugin for oh-my-zsh
 
 This little tool defines 3 helper functions:
-| `Command` | `Action`
-|-----------|----------
+
+| `Command`               | Action
+|-------------------------|----------------------------------------
 | `mfunc name [name] ...` | create new function(s) interactively
 | `rfunc name [name] ...` | delete existing user-defined function(s)
 | ` lfunc`                | list all user-defined functions
