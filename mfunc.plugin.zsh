@@ -25,9 +25,41 @@ fi
 #functions
 ##########
 
-# helper
-function mfunc_define() {
+# helpers
+mf_yesorno()
+{
+    # variables
+    local question="${1}"
+    local prompt="${question} "
+    local yes_RETVAL="0"
+    local no_RETVAL="3"
+    local RETVAL=""
+    local answer=""
 
+    # read-eval loop
+    while true ; do
+        printf $prompt
+        read -r answer
+
+        case ${answer:=${default}} in
+            Y|y|YES|yes|Yes )
+                RETVAL=${yes_RETVAL} && \
+                    break
+                ;;
+            N|n|NO|no|No )
+                RETVAL=${no_RETVAL} && \
+                    break
+                ;;
+            * )
+                echo "Please provide a valid answer (y or n)"
+                ;;
+        esac
+    done
+
+    return ${RETVAL}
+}
+
+function mf_define() {
             touch $ZSH/functions/$i
             chmod +x $ZSH/functions/$i
             echo "enter function '$i' and finish with CTRL-D"
@@ -36,17 +68,27 @@ function mfunc_define() {
             source $ZSH/custom/plugins/mfunc/mfunc.plugin.zsh
             echo "function is now available"
 }
+
 # make function(s)
 function mfunc() {
 
     # berate user if no arguments given
     # to do: interactive mode
-    if (($# == 0)); then
+    if (($# == 0))
+    then
         echo "usage: mfunc [function name]"
     else
         # to do: prompt user to overwrite existing function
         for i do;
-            mfunc_define $i
+            if [[ -e $ZSH/functions/$i ]]
+            then
+                if mf_yesorno "function $i already exists, overwrite? (Y/n)"
+                then
+                    mf_define $i
+                else
+                    echo "aborted"
+               fi
+            fi
         done
     fi
 }
