@@ -18,7 +18,7 @@ if [ ! -d $ZSH/functions/ ]; then
 fi
 
 # autoload any functions in functions directory
-[[ -e $ZSH/functions/* ]] && autoload $(ls $ZSH/functions/)
+[[ ! -e $ZSH/functions/* ]] && autoload $(ls $ZSH/functions/)
 
 
 #
