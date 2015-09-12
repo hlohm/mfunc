@@ -32,7 +32,7 @@ fi
 ##########
 
 # helpers
-mf_yesorno()
+_mf_yesorno()
 {
     # variables
     local question="${1}"
@@ -65,7 +65,7 @@ mf_yesorno()
     return ${RETVAL}
 }
 
-function mf_define() {
+function _mf_define() {
             touch $fdir/$i
             chmod +x $fdir/$i
             echo "enter function '$i' and finish with CTRL-D"
@@ -88,9 +88,9 @@ function mfunc() {
         # TODO: input sanitization
             if [[ -e $fdir/$i ]]
             then
-                if mf_yesorno "function $i already exists, overwrite? (Y/n)"
+                if _mf_yesorno "function $i already exists, overwrite? (Y/n)"
                 then
-                    mf_define $i
+                    _mf_define $i
                 else
                     echo "aborted"
                fi
