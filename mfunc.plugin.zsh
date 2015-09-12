@@ -10,15 +10,21 @@
 #
 # init
 ######
+fdir=$HOME/.functions
 
-# make sure functions directory exists
-if [ ! -d $HOME/.functions/ ]; then
-    mkdir $HOME/.functions/
+# check if functions directory exists, create if it doesn't
+if [ ! -d $fdir/ ]; then
+    mkdir $fdir/
     echo "mfunc init: functions directory created in $ZSH"
 fi
 
+# check if fpath contains our fdir, add it if it doesn't
+if [[ $#fpath[(r)$fdir] == 0 ]]; then
+    fpath=($fdir $fpath) 
+fi
+
 # autoload any functions in functions directory
-[[ ! -e $HOME/.functions/* ]] && autoload $(ls $HOME/.functions/)
+[[ ! -e $fdir/* ]] && autoload $(ls $fdir/)
 
 
 #
@@ -60,12 +66,12 @@ mf_yesorno()
 }
 
 function mf_define() {
-            touch $HOME/.functions/$i
-            chmod +x $HOME/.functions/$i
+            touch $fdir/$i
+            chmod +x $fdir/$i
             echo "enter function '$i' and finish with CTRL-D"
             cat >$HOME/.functions/$i
-            echo "new function '$i' created in $HOME/.functions"
-            autoload $(ls $HOME/.functions/)
+            echo "new function '$i' created in $fdir"
+            autoload $(ls $fdir/)
             echo "function is now available"
 }
 
@@ -80,7 +86,7 @@ function mfunc() {
     else
         for i do;
         # TODO: input sanitization
-            if [[ -e $HOME/.functions/$i ]]
+            if [[ -e $fdir/$i ]]
             then
                 if mf_yesorno "function $i already exists, overwrite? (Y/n)"
                 then
@@ -104,8 +110,8 @@ function rfunc() {
 
     # TODO: autocompletion/wildcards
     for i; do
-        if [ -e $HOME/.functions/$i ]; then
-            rm $HOME/.functions/$i
+        if [ -e $fdir/$i ]; then
+            rm $fdir/$i
             echo "function $i removed"
         else
             echo "function $i not found"
@@ -117,7 +123,7 @@ function rfunc() {
 # list functions
 function lfunc() {
     # TODO: specific functions, wildcards
-    for f in $(ls $HOME/.functions/); do
-        echo $f "() {"; cat $HOME/.functions/$f; echo "}\n"
+    for f in $(ls $fdir); do
+        echo $f "() {"; cat $fdir/$f; echo "}\n"
     done
 }
