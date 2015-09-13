@@ -1,5 +1,5 @@
-## mfunc
-#### a function wrapper plugin for oh-my-zsh
+### mfunc
+#### a function wrapper plugin for ZSH
 
 Allows you to define persistent functions on-the-fly, without the need to add
 them to your config files. Your functions are permanently available until you
@@ -19,6 +19,7 @@ first time).
 
 #### Installation
 
+######a) As an oh-my-zsh plugin
 1. Run:
 
 `cd $ZSH/custom && git clone https://github.com/hlohm/mfunc.git plugins/mfunc`
@@ -27,6 +28,11 @@ first time).
 look something like this:
 
 `plugins=(git mfunc)`
+
+######b) using antigen
+1. Add this line where you load your antigen bundles in your `.zshrc`:
+
+`antigen bundle hlohm/mfunc`
 
 Upon its first run the plugin will notify you that it created the directory in
 which it stores your functions.
