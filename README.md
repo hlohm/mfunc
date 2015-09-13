@@ -1,5 +1,5 @@
 ### mfunc
-#### a function wrapper plugin ZSH
+#### a function wrapper plugin for ZSH
 
 Allows you to define persistent functions on-the-fly, without the need to add
 them to your config files. Your functions are permanently available until you
