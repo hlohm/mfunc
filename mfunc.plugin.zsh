@@ -20,7 +20,7 @@ fi
 
 # check if fpath contains our fdir, add it if it doesn't
 if [[ $#fpath[(r)$fdir] == 0 ]]; then
-    fpath=($fdir $fpath) 
+    fpath=($fdir $fpath)
 fi
 
 # autoload any functions in functions directory
@@ -124,7 +124,7 @@ function rfunc() {
 
 # list functions
 function lfunc() {
-    # TODO: specific functions, wildcards
+    # TODO: specific functions, wildcards, names only OR name + definition
     for f in $(ls $fdir); do
         echo $f "() {"; cat $fdir/$f; echo "}\n"
     done
