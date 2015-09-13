@@ -94,6 +94,8 @@ function mfunc() {
                 else
                     echo "aborted"
                fi
+            else
+                _mf_define $i
             fi
         done
     fi
@@ -117,7 +119,7 @@ function rfunc() {
             echo "function $i not found"
         fi
     done
-    echo "functions will still be available until next login"
+    echo "functions might still be available until next login"
 }
 
 # list functions
