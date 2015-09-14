@@ -90,6 +90,7 @@ function mfunc() {
             then
                 if _mf_yesorno "function $i already exists, overwrite? (Y/n)"
                 then
+                    unfunction $1   # forget the old version first
                     _mf_define $i
                 else
                     echo "aborted"
