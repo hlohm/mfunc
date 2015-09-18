@@ -10,22 +10,25 @@
 #
 # init
 ######
+
+# this is where our functions live
 fdir=$HOME/.functions
 
 # check if functions directory exists, create if it doesn't
-if [ ! -d $fdir/ ]; then
+if [[ ! -d $fdir/ ]]; then
     mkdir $fdir/
-    echo "mfunc init: functions directory created in $ZSH"
+    echo "mfunc init: functions directory created in $fdir"
 fi
 
 # check if fpath contains our fdir, add it if it doesn't
-if [[ $#fpath[(r)$fdir] == 0 ]]; then
+if (( ! ${fpath[(I)$fdir]} )); then
     fpath=($fdir $fpath)
 fi
 
 # autoload any functions in functions directory
-[[ ! -e $fdir/* ]] && autoload $(ls $fdir/)
-
+if [[ ! -e $fdir/* ]]; then
+   autoload $(ls $fdir/)
+fi
 
 #
 #functions
