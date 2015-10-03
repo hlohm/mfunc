@@ -26,7 +26,7 @@ if (( ! ${fpath[(I)$fdir]} )); then
 fi
 
 # autoload any functions in functions directory
-if [[ ! -e $fdir/* ]]; then
+if [[ -e $fdir/* ]]; then
    autoload $(ls $fdir/)
 fi
 
