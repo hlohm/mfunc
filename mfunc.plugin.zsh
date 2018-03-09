@@ -12,7 +12,7 @@
 ######
 
 # this is where our functions live
-fdir=$HOME/.functions
+fdir=${ZDOTDIR:-${HOME}}/.functions
 
 # check if functions directory exists, create if it doesn't
 if [[ ! -d $fdir/ ]]; then
