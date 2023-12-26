@@ -19,7 +19,7 @@ first time).
 
 #### Installation
 
-######a) As an oh-my-zsh plugin
+###### a) As an oh-my-zsh plugin
 1. Run:
 `cd $ZSH/custom && git clone https://github.com/hlohm/mfunc.git plugins/mfunc`
 
@@ -27,17 +27,23 @@ first time).
 look something like this:
 `plugins=(git mfunc)`
 
-######b) using antigen
+###### b) using antigen
 1. Add this line where you load your antigen bundles in your `.zshrc`:
 
 `antigen bundle hlohm/mfunc`
-######c) with vanilla ZSH
+###### c) with vanilla ZSH
 1. `git clone` this repo to a location of your choice
 
 2. add a line `source /location/of/your/choice/mfunc.plugin.zsh` to your .zshrc
 
 Upon its first run the plugin will notify you that it created the directory in
 which it stores your functions.
+
+#### Configuration
+The directory where functions are stored can be changed by setting the MFUNCDIR environment variable.
+
+By default, `$ZDOTDIR/functions` will be used.
+If ZDOTDIR isn't set, `$HOME/.functions` will be used instead.
 
 #### Disclaimer
 
