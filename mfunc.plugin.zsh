@@ -12,22 +12,26 @@
 ######
 
 # this is where our functions live
-fdir=$HOME/.functions
+[[ -z $MFUNCDIR ]] &&
+	[[ -z $ZDOTDIR ]] &&
+		export MFUNCDIR="$ZDOTDIR/functions" ||
+		export MFUNCDIR="$HOME/.functions"
+	
 
 # check if functions directory exists, create if it doesn't
-if [[ ! -d $fdir/ ]]; then
-    mkdir $fdir/
-    echo "mfunc init: functions directory created in $fdir"
+if [[ ! -d $MFUNCDIR/ ]]; then
+    mkdir $MFUNCDIR/
+    echo "mfunc init: functions directory created in $MFUNCDIR"
 fi
 
-# check if fpath contains our fdir, add it if it doesn't
-if (( ! ${fpath[(I)$fdir]} )); then
-    fpath=($fdir $fpath)
+# check if fpath contains our MFUNCDIR, add it if it doesn't
+if (( ! ${fpath[(I)$MFUNCDIR]} )); then
+    fpath=($MFUNCDIR $fpath)
 fi
 
 # autoload any functions in functions directory
-if [[ -e $fdir/* ]]; then
-   autoload $(ls $fdir/)
+if [[ -e $MFUNCDIR/* ]]; then
+   autoload $(ls $MFUNCDIR/)
 fi
 
 #
@@ -69,12 +73,12 @@ _mf_yesorno()
 }
 
 function _mf_define() {
-            touch $fdir/$i
-            chmod +x $fdir/$i
+            touch $MFUNCDIR/$i
+            chmod +x $MFUNCDIR/$i
             echo "enter function '$i' and finish with CTRL-D"
             cat >$HOME/.functions/$i
-            echo "new function '$i' created in $fdir"
-            autoload $(ls $fdir/)
+            echo "new function '$i' created in $MFUNCDIR"
+            autoload $(ls $MFUNCDIR/)
             echo "function is now available"
 }
 
@@ -89,7 +93,7 @@ function mfunc() {
     else
         for i do;
         # TODO: input sanitization
-            if [[ -e $fdir/$i ]]
+            if [[ -e $MFUNCDIR/$i ]]
             then
                 if _mf_yesorno "function $i already exists, overwrite? (Y/n)"
                 then
@@ -116,8 +120,8 @@ function rfunc() {
 
     # TODO: autocompletion/wildcards
     for i; do
-        if [ -e $fdir/$i ]; then
-            rm $fdir/$i
+        if [ -e $MFUNCDIR/$i ]; then
+            rm $MFUNCDIR/$i
             echo "function $i removed"
         else
             echo "function $i not found"
@@ -129,7 +133,7 @@ function rfunc() {
 # list functions
 function lfunc() {
     # TODO: specific functions, wildcards, names only OR name + definition
-    for f in $(ls $fdir); do
-        echo $f "() {"; cat $fdir/$f; echo "}\n"
+    for f in $(ls $MFUNCDIR); do
+        echo $f "() {"; cat $MFUNCDIR/$f; echo "}\n"
     done
 }
