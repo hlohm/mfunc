@@ -13,9 +13,9 @@
 
 # this is where our functions live
 [[ -z $MFUNCDIR ]] &&
-	[[ -z $ZDOTDIR ]] &&
-		export MFUNCDIR="$ZDOTDIR/functions" ||
-		export MFUNCDIR="$HOME/.functions"
+	MFUNCDIR="$HOME/.functions"
+	[[ -z $ZDOTDIR ]] ||
+		MFUNCDIR="$ZDOTDIR/functions"
 	
 
 # check if functions directory exists, create if it doesn't
