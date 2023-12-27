@@ -1,0 +1,18 @@
+# berate user if no arguments given
+# TODO: interactive mode
+(($# == 0)) && {
+    echo "usage: mfunc [function name]"
+    return 1
+}
+
+for i; do
+    # TODO: input sanitization
+    [[ -e $MFUNCDIR/$i ]] && {
+        _mf_yesorno "function $i already exists, overwrite? (Y/n)" || {
+            echo "aborted"
+            return
+        }
+        unfunction $i   # forget the old version first
+    }
+    _mf_define $i
+done

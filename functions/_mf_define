@@ -1,0 +1,8 @@
+touch $MFUNCDIR/$i
+chmod u+x $MFUNCDIR/$i
+echo "enter function '$i' and finish with CTRL-D"
+>$MFUNCDIR/$i
+echo
+echo "new function '$i' created in $MFUNCDIR"
+autoload $i
+echo "function is now available"

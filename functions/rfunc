@@ -1,0 +1,17 @@
+# demand argument
+# TODO: interactive mode
+(($# == 0)) && {
+    echo "please name at least one function to delete"
+    return 1
+}
+
+# TODO: autocompletion/wildcards
+for i; do
+    [[ -e $MFUNCDIR/$i ]] || {
+        echo "function $i not found"
+        return 2
+    }
+    rm $MFUNCDIR/$i
+    echo "function $i removed"
+done
+echo "functions might still be available until next login"

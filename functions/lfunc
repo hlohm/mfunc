@@ -1,0 +1,4 @@
+# TODO: specific functions, wildcards, names only OR name + definition
+for f in $MFUNCDIR/*; do
+    printf "%s () {\n%s\n}\n\n" "$(basename $f)" "$(cat $f)"
+done

@@ -1,0 +1,29 @@
+# variables
+local question="${1}"
+local prompt="${question} "
+local yes_RETVAL="0"
+local no_RETVAL="3"
+local RETVAL=""
+local answer=""
+
+# read-eval loop
+while true ; do
+printf $prompt
+read -r answer
+
+case ${answer:=${default}} in
+    Y|y|YES|yes|Yes )
+        RETVAL=${yes_RETVAL} && \
+            break
+        ;;
+    N|n|NO|no|No )
+        RETVAL=${no_RETVAL} && \
+            break
+        ;;
+    * )
+        echo "Please provide a valid answer (y or n)"
+        ;;
+esac
+done
+
+return ${RETVAL}
