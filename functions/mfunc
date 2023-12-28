@@ -18,3 +18,6 @@ for i; do
     }
     _mf_define $i
 done
+(($# > 1)) &&
+    echo "function is now available" ||
+    echo "functions are now available

@@ -9,4 +9,3 @@ $EDITOR "$ftopts" "${MFUNCDIR}/$i" || {
 }
 echo "new function '$i' created in $MFUNCDIR"
 autoload $i
-echo "function is now available"
