@@ -1,8 +1,9 @@
-touch $MFUNCDIR/$i
-chmod u+x $MFUNCDIR/$i
-echo "enter function '$i' and finish with CTRL-D"
->$MFUNCDIR/$i
-echo
+local editor=$(basename $EDITOR)
+[[ $editor == *vim ]] &&
+    local ftopts="-c \"set ft=zsh\"" ||
+[[ $editor == micro ]] &&
+    local ftopts="-filetype=zsh"
+$EDITOR "$ftopts" "${MFUNCDIR}/$i"
 echo "new function '$i' created in $MFUNCDIR"
 autoload $i
 echo "function is now available"

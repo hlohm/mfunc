@@ -7,12 +7,10 @@
 ##################
 
 # this is where our functions live
-[[ -v MFUNCDIR ]] || {
-    MFUNCDIR="$HOME/.functions"
+[[ -v MFUNCDIR ]] ||
+    MFUNCDIR="$HOME/.functions" &&
     [[ -v ZDOTDIR ]] &&
         MFUNCDIR="$ZDOTDIR/functions"
-    export MFUNCDIR
-}
 	
 
 # check if functions directory exists, create if it doesn't
@@ -21,13 +19,14 @@
     echo "mfunc init: functions directory created in $MFUNCDIR"
 }
 
-# add MFUNC_FUNCTIONS_D to fpath
+# check if fpath contains MFUNC_FUNCTIONS_D, add it if it doesn't
 MFUNC_FUNCTIONS_D="$(dirname $0)/functions"
-fpath=($MFUNC_FUNCTIONS_D "${fpath[@]}" )
+(( ${fpath[(I)$MFUNC_FUNCTIONS_D]} )) ||
+    fpath=($MFUNC_FUNCTIONS_D "${fpath[@]}")
 
 # check if fpath contains our MFUNCDIR, add it if it doesn't
-(( ! ${fpath[(I)$MFUNCDIR]} )) &&
-    fpath=($MFUNCDIR $fpath)
+(( ${fpath[(I)$MFUNCDIR]} )) ||
+    fpath=($MFUNCDIR "${fpath[@]}")
 
 # autoload functions
 for file in $MFUNC_FUNCTIONS_D/* $MFUNCDIR/*; do

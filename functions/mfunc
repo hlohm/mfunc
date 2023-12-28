@@ -8,10 +8,12 @@
 for i; do
     # TODO: input sanitization
     [[ -e $MFUNCDIR/$i ]] && {
-        _mf_yesorno "function $i already exists, overwrite? (Y/n)" || {
-            echo "aborted"
+        read -q "choice?function $i already exists, press Y/y to edit with $EDITOR or any other key to abort: " || {
+            echo
+            echo "aborting..."
             return
         }
+        echo
         unfunction $i   # forget the old version first
     }
     _mf_define $i

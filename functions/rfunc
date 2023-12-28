@@ -11,6 +11,10 @@ for i; do
         echo "function $i not found"
         return 2
     }
+    read -q "choice?Press Y/y to remove $i from $MFUNCDIR or any other key to skip:" ||
+        echo
+        continue
+    echo
     rm $MFUNCDIR/$i
     echo "function $i removed"
 done
