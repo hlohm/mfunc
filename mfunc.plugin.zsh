@@ -30,5 +30,5 @@ MFUNC_FUNCTIONS_D="$(dirname $0)/functions"
 
 # autoload functions
 for file in $MFUNC_FUNCTIONS_D/* $MFUNCDIR/*; do
-    autoload $(basename $file)
+    autoload ${file##*/}
 done

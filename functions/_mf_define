@@ -1,9 +1,12 @@
-local editor=$(basename $EDITOR)
+local editor="${EDITOR##*/}"
 [[ $editor == *vim ]] &&
     local ftopts="-c \"set ft=zsh\"" ||
 [[ $editor == micro ]] &&
     local ftopts="-filetype=zsh"
-$EDITOR "$ftopts" "${MFUNCDIR}/$i"
+$EDITOR "$ftopts" "${MFUNCDIR}/$i" || {
+    echo "aborting..."
+    return
+}
 echo "new function '$i' created in $MFUNCDIR"
 autoload $i
 echo "function is now available"
