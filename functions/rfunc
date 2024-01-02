@@ -6,16 +6,20 @@
 }
 
 # TODO: autocompletion/wildcards
+local count=0
 for i; do
-    [[ -e $MFUNCDIR/$i ]] || {
+    [[ -f $MFUNCDIR/$i ]] || {
         echo "function $i not found"
         return 2
     }
-    read -q "choice?Press Y/y to remove $i from $MFUNCDIR or any other key to skip:" ||
-        echo
-        continue
-    echo
-    rm $MFUNCDIR/$i
-    echo "function $i removed"
+    rm -iv $MFUNCDIR/$i
+    [[ -f $MFUNCDIR/$i ]] || count+=1 
 done
-echo "functions might still be available until next login"
+
+((count == 0)) &&
+    return
+
+echo -n "function"
+((count > 1)) &&
+    echo -n "s"
+echo " are still be available until next login"

@@ -1,0 +1,9 @@
+local str=()
+for f in ${MFUNCDIR}/*; do
+    str+=("\n${f##*/} () {" '    '${^"${(f)$(<$f)}"} "}")
+done
+hash highlight 2>/dev/null  &&
+    highlight -S zsh -i <(print -ln $str) || {
+    print -ln $str
+    echo "Hint: install 'highlight' to enable syntax highlighting"
+}

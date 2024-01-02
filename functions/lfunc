@@ -1,4 +1,15 @@
-# TODO: specific functions, wildcards, names only OR name + definition
-for f in ${MFUNCDIR}/*; do
-    printf "%s () {\n%s\n}\n\n" "${f##*/}" "$(cat $f)"
-done
+# TODO: specific functions, wildcards
+getopts "hv" opt && {
+    shift $((OPTIND -1))
+    case ${opt} in
+    h )
+            _lf_help
+            return
+        ;;
+    v )
+            _lf_verbose
+            return
+        ;;
+    esac
+}
+command ls "$MFUNCDIR"

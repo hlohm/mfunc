@@ -7,6 +7,7 @@
 
 for i; do
     # TODO: input sanitization
+    local edit=false
     [[ -e $MFUNCDIR/$i ]] && {
         read -q "choice?function $i already exists, press Y/y to edit with $EDITOR or any other key to abort: " || {
             echo
@@ -15,9 +16,11 @@ for i; do
         }
         echo
         unfunction $i   # forget the old version first
+        edit=true
     }
-    _mf_define $i
+    _mf_define $i || return
 done
-(($# > 1)) &&
-    echo "function is now available" ||
-    echo "functions are now available
+echo -n "function"
+(($# == 1)) &&
+    echo -n " is" ||echo -n "s are"
+echo " now available"

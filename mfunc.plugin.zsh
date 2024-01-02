@@ -21,14 +21,11 @@
 
 # check if fpath contains MFUNC_FUNCTIONS_D, add it if it doesn't
 MFUNC_FUNCTIONS_D="$(dirname $0)/functions"
-(( ${fpath[(I)$MFUNC_FUNCTIONS_D]} )) ||
-    fpath=($MFUNC_FUNCTIONS_D "${fpath[@]}")
+(( ${fpath[(I)$MFUNC_FUNCTIONS_D]} )) || fpath=($MFUNC_FUNCTIONS_D "${fpath[@]}")
 
 # check if fpath contains our MFUNCDIR, add it if it doesn't
-(( ${fpath[(I)$MFUNCDIR]} )) ||
-    fpath=($MFUNCDIR "${fpath[@]}")
+(( ${fpath[(I)$MFUNCDIR]} )) || fpath=($MFUNCDIR "${fpath[@]}")
 
 # autoload functions
-for file in $MFUNC_FUNCTIONS_D/* $MFUNCDIR/*; do
-    autoload ${file##*/}
-done
+ files=($MFUNC_FUNCTIONS_D/* $MFUNCDIR/*)
+autoload ${^files##*/}
