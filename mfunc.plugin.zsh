@@ -27,5 +27,5 @@ MFUNC_FUNCTIONS_D="$(dirname $0)/functions"
 (( ${fpath[(I)$MFUNCDIR]} )) || fpath=($MFUNCDIR "${fpath[@]}")
 
 # autoload functions
- files=($MFUNC_FUNCTIONS_D/* $MFUNCDIR/*)
+files=($MFUNC_FUNCTIONS_D/* $MFUNCDIR/*)
 autoload ${^files##*/}
