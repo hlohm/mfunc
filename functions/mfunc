@@ -1,0 +1,26 @@
+# berate user if no arguments given
+# TODO: interactive mode
+(($# == 0)) && {
+    echo "usage: mfunc [function name]"
+    return 1
+}
+
+for i; do
+    # TODO: input sanitization
+    local edit=false
+    [[ -e $MFUNCDIR/$i ]] && {
+        read -q "choice?function $i already exists, press Y/y to edit with $EDITOR or any other key to abort: " || {
+            echo
+            echo "aborting..."
+            return
+        }
+        echo
+        unfunction $i   # forget the old version first
+        edit=true
+    }
+    _mf_define $i || return
+done
+echo -n "function"
+(($# == 1)) &&
+    echo -n " is" ||echo -n "s are"
+echo " now available"

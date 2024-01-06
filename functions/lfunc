@@ -1,0 +1,15 @@
+# TODO: specific functions, wildcards
+getopts "hv" opt && {
+    shift $((OPTIND -1))
+    case ${opt} in
+    h )
+            _lf_help
+            return
+        ;;
+    v )
+            _lf_verbose
+            return
+        ;;
+    esac
+}
+command ls "$MFUNCDIR"
