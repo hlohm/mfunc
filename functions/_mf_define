@@ -1,24 +1,20 @@
-if [[ $EDITOR == *vim ]]
-then
+if [[ $EDITOR == *vim ]]; then
     local ftopts="-c 'set ft=zsh'"
-elif [[ $EDITOR == *micro ]]
-then
+elif [[ $EDITOR == *micro ]]; then
     local ftopts="-filetype=zsh"
 fi
 
-eval $EDITOR "$ftopts" "${MFUNCDIR}/$1"
+eval "$EDITOR" "$ftopts" "${MFUNCDIR}/$1"
 
-if ! [[ -f "${MFUNCDIR}/$1" ]]
-then
+if ! [[ -f "${MFUNCDIR}/$1" ]]; then
     echo "aborting..."
     return 1
 else
-    $commands[${1}] && unfunction $1 # just in case
-    autoload $1
+    ${commands[${1}]} && unfunction "$1" # just in case
+    autoload "$1"
 fi
 
-if $edit
-then
+if "$edit"; then
     echo "updated function '${1}'"
 else
     echo "new function '${1}' created in $MFUNCDIR"

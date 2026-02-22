@@ -10,10 +10,10 @@ then
 fi
 
 # get a list of functions managed by mfunc
-local functions=( $MFUNCDIR/* )
+local functions_array=( "$MFUNCDIR"/* )
 
 # strip the paths
-functions="${functions[@]:t}"
+local functions="${functions_array[@]:t}"
 
 (
     # load functions

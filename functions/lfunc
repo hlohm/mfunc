@@ -1,15 +1,14 @@
 # TODO: specific functions, wildcards
-if getopts "hv" opt
-then
-    shift $((OPTIND -1))
+if getopts "hv" opt; then
+    shift $((OPTIND - 1))
     case ${opt} in
-    h )
-            _lf_help
-            return
+    h)
+        _lf_help
+        return
         ;;
-    v )
-            _lf_verbose
-            return
+    v)
+        _lf_verbose
+        return
         ;;
     esac
 fi

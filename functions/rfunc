@@ -1,23 +1,21 @@
 # demand argument
 # TODO: interactive mode
-if (($# == 0))
-then
+if (($# == 0)); then
     echo "please name at least one function to delete"
     return 1
 fi
 
 # TODO: autocompletion/wildcards
-local count=0
-for i
-do
-    if not [[ -f $MFUNCDIR/$i ]]
-    then
+local count
+typeset -i count=0
+for i; do
+    if not [[ -f "$MFUNCDIR/$i" ]]; then
         echo "function $i not found"
         return 2
     fi
 
-    autoload +X $i
-    rm -iv $MFUNCDIR/$i
+    autoload +X "$i"
+    rm -iv "$MFUNCDIR/$i"
     [[ -f $MFUNCDIR/$i ]] || count+=1
 done
 
@@ -25,6 +23,9 @@ done
     return
 
 echo -n "function"
-((count == 1)) &&
-    echo -n " is" || echo -n "s are"
+if ((count == 1)); then
+    echo -n " is"
+else
+    echo -n "s are"
+fi
 echo " still available until next login and can be viewed with the 'where' builtin"
