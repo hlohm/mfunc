@@ -10,7 +10,7 @@ if ! [[ -f "${MFUNCDIR}/$1" ]]; then
     echo "aborting..."
     return 1
 else
-    ${commands[${1}]} && unfunction "$1" # just in case
+    [[ ${functions[${1}]} ]] && unfunction "$1" # just in case
     autoload "$1"
 fi
 
