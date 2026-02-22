@@ -9,7 +9,7 @@ fi
 local count
 typeset -i count=0
 for i; do
-    if not [[ -f "$MFUNCDIR/$i" ]]; then
+    if ! [[ -f "$MFUNCDIR/$i" ]]; then
         echo "function $i not found"
         return 2
     fi
