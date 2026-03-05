@@ -1,0 +1,29 @@
+# Ensure MFUNCDIR is set
+if ! [[ -v MFUNCDIR ]]
+then
+    if [[ -v ZDOTDIR ]]
+    then
+        MFUNCDIR="${ZDOTDIR}/functions"
+    else
+        MFUNCDIR="${HOME}/.functions"
+    fi
+fi
+
+# get a list of functions managed by mfunc
+local functions_array=( "$MFUNCDIR"/* )
+
+# strip the paths
+local functions="${functions_array[@]:t}"
+
+(
+    # load functions
+    autoload +X "${(z)functions[@]}"
+
+    if ((${+commands[highlight]}))
+    then
+        highlight -S zsh -i <(where "${(z)functions[@]}")
+    else
+        where "${(z)functions[@]}"
+        echo "Hint: install 'highlight' to enable syntax highlighting" >&2
+    fi
+)

@@ -1,0 +1,9 @@
+echo """\
+Part of the mfunc zsh plugin
+Lists all the functions in $MFUNCDIR
+
+Usage: $0 [-v|h]
+Options:
+ -v   Enable verbose mode (print the content of each function)
+ -h   Print this help message\
+ """
