@@ -1,3 +1,5 @@
+## ATTENTION: This has been updated substantially with the help of AI and is essentially untested. Use at your own risk.
+
 ### mfunc
 #### a function wrapper plugin for ZSH
 
